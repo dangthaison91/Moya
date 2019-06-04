@@ -91,11 +91,11 @@ public extension MoyaProvider {
         switch stubBehavior {
         case .never:
             switch endpoint.task {
-            case .requestPlain, .requestData, .requestJSONEncodable, .requestCustomJSONEncodable, .requestParameters, .requestCompositeData, .requestCompositeParameters:
+            case .requestPlain, .requestCustomJSONEncodable, .requestParameters:
                 return self.sendRequest(target, request: request, callbackQueue: callbackQueue, progress: progress, completion: completion)
             case .uploadFile(let file):
                 return self.sendUploadFile(target, request: request, callbackQueue: callbackQueue, file: file, progress: progress, completion: completion)
-            case .uploadMultipart(let multipartBody), .uploadCompositeMultipart(let multipartBody, _):
+            case .uploadMultipart(let multipartBody):
                 guard !multipartBody.isEmpty && endpoint.method.supportsMultipart else {
                     fatalError("\(target) is not a multipart upload target.")
                 }

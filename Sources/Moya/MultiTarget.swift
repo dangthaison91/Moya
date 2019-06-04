@@ -45,6 +45,11 @@ public enum MultiTarget: TargetType {
         return target.headers
     }
 
+    /// The headers of the embedded target.
+    public var urlParameters: [String : Any]? {
+        return target.urlParameters
+    }
+
     /// The embedded `TargetType`.
     public var target: TargetType {
         switch self {
