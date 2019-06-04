@@ -19,6 +19,8 @@ internal extension URLRequest {
     }
 
     func encoded(parameters: [String: Any], parameterEncoding: ParameterEncoding) throws -> URLRequest {
+        guard !parameters.isEmpty else { return self }
+
         do {
             return try parameterEncoding.encode(self, with: parameters)
         } catch {

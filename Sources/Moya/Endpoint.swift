@@ -86,6 +86,13 @@ extension Endpoint {
         }
 
         var request = URLRequest(url: requestURL)
+        
+        /// Encode URL Parameters by using URLEncoding
+        if let urlParameters = urlParameters, !urlParameters.isEmpty {
+            let queryEncoding = URLEncoding(destination: .queryString)
+            request = try request.encoded(parameters: urlParameters, parameterEncoding: queryEncoding)
+        }
+
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = httpHeaderFields
 
